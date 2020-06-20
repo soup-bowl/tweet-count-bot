@@ -15,15 +15,19 @@ if (empty(getenv('CONSUMER_KEY')) && empty(getenv('CONSUMER_SECRET'))) {
 	die();
 }
 
+$user = getenv('SCAN_USER_NAME');
+$to   = Carbon::today()->format('Y-m-d');
+$from = Carbon::today()->subDays(1)->format('Y-m-d');
+$com  = "from:{$user} since:{$from} until:{$to}";
+
 $connection = new TwitterOAuth(getenv('CONSUMER_KEY'), getenv('CONSUMER_SECRET'), getenv('ACCESS_TOKEN'), getenv('ACCESS_SECRET'));
 $content    = $connection->get('search/tweets', [
-	'from'  => getenv('SCAN_USER_NAME'),
-	'since' => Carbon::today()->subDays(2)->format('Y-m-d'),
-	'until' => Carbon::today()->subDays(1)->format('Y-m-d'),
+	'q'     => $com,
 	'count' => 100,
 ]);
 
 $message = sprintf(getenv('MESSAGE'), '@'.getenv('SCAN_USER_NAME'), count($content->statuses));
 
+echo 'https://twitter.com/search?q=' . urlencode($com) . PHP_EOL;
 echo $message;
 die();
