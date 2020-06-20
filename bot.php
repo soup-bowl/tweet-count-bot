@@ -35,5 +35,5 @@ if ($tweet_on) {
 }
 
 echo 'https://twitter.com/search?q=' . urlencode($com) . PHP_EOL;
-echo $message;
+echo $message . PHP_EOL;
 exit(0);
