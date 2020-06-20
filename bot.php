@@ -25,11 +25,13 @@ $content    = $connection->get('search/tweets', [
 	'count' => 100,
 ]);
 
-$message  = sprintf(getenv('GENERAL_MESSAGE'), "{$user}", count($content->statuses));
-$tweet_on = ( getenv('GENERAL_DISABLE') === '1' ) ? true : false;
+$message  = sprintf(getenv('GENERAL_MESSAGE'), "@{$user}", count($content->statuses));
+$tweet_on = ( getenv('GENERAL_TWEET_ENABLED') === '1' ) ? true : false;
 $resp     = null;
 if ($tweet_on) {
 	$resp = $connection->post('statuses/update', ['status' => $message]);
+} else {
+	echo 'Tweeting is off.' . PHP_EOL;
 }
 
 echo 'https://twitter.com/search?q=' . urlencode($com) . PHP_EOL;
