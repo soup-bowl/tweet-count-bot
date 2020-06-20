@@ -28,6 +28,8 @@ $content    = $connection->get('search/tweets', [
 
 $message = sprintf(getenv('MESSAGE'), "@{$user}", count($content->statuses));
 
+$connection->post('statuses/update', ['status' => $message]);
+
 echo 'https://twitter.com/search?q=' . urlencode($com) . PHP_EOL;
 echo $message;
 die();
