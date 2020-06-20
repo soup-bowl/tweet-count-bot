@@ -26,7 +26,7 @@ $content    = $connection->get('search/tweets', [
 	'count' => 100,
 ]);
 
-$message = sprintf(getenv('MESSAGE'), '@'.getenv('SCAN_USER_NAME'), count($content->statuses));
+$message = sprintf(getenv('MESSAGE'), "@{$user}", count($content->statuses));
 
 echo 'https://twitter.com/search?q=' . urlencode($com) . PHP_EOL;
 echo $message;
