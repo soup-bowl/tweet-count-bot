@@ -11,8 +11,7 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 use Carbon\Carbon;
 
 if (empty(getenv('CONSUMER_KEY')) && empty(getenv('CONSUMER_SECRET'))) {
-	echo 'Twitter Consumer API config not set. Exiting.';
-	die();
+	exit('Twitter Consumer API config not set. Exiting.');
 }
 
 $user = getenv('SCAN_USER_NAME');
@@ -26,10 +25,13 @@ $content    = $connection->get('search/tweets', [
 	'count' => 100,
 ]);
 
-$message = sprintf(getenv('MESSAGE'), "@{$user}", count($content->statuses));
-
-$connection->post('statuses/update', ['status' => $message]);
+$message  = sprintf(getenv('GENERAL_MESSAGE'), "{$user}", count($content->statuses));
+$tweet_on = ( getenv('GENERAL_DISABLE') === '1' ) ? true : false;
+$resp     = null;
+if ($tweet_on) {
+	$resp = $connection->post('statuses/update', ['status' => $message]);
+}
 
 echo 'https://twitter.com/search?q=' . urlencode($com) . PHP_EOL;
 echo $message;
-die();
+exit(0);
