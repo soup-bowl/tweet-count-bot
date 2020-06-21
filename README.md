@@ -26,6 +26,8 @@ docker run \
 ```
 (for Powershell, replace backslash with backticks(`) if you wish to preserve newlines).
 
+Alternatively, you can also pull the image from GitHub using `docker.pkg.github.com/soup-bowl/tweet-count-bot/tweet-count-bot:latest`.
+
 ## Running natively
 Clone this repository, and run `composer install`. If you have a .env file in the same directory, it will be loaded in. Please see .env.example for usage.
 
