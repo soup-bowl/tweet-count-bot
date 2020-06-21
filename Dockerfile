@@ -7,6 +7,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 WORKDIR /opt/tbot
 
+ENV GENERAL_TWEET_ENABLED 1
+ENV GENERAL_MESSAGE User %s has posted %d tweets today.
+
 COPY bot.php       bot.php
 COPY composer.json composer.json
 COPY composer.lock composer.lock
