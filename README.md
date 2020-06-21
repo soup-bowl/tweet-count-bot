@@ -13,7 +13,7 @@ This project accepts the following inputs:
 * `GENERAL_MESSAGE` A printf-compatible string to format the tweet. (Default is "Yesterday, %s tweeted %d times.").
 
 ## Running via Docker
-[This propject is on Dockerhub][dockerimg], and can be used as an exec command.
+[This propject is auto-built on Dockerhub][dockerimg], and can be used as an exec command.
 
 ```
 docker run \
